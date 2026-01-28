@@ -31,10 +31,9 @@ targets:
     mode: development
     default: true
     variables:
-      catalog_name: dev
+      catalog_name: lw_mlops_demo_dev
     workspace:
-      # TODO: add dev workspace URL
-      host:
+      host: https://adb-1932855278966667.7.azuredatabricks.net
 
   staging:
     variables:
