@@ -123,12 +123,17 @@ X_test = test.drop(["fare_amount"], axis=1)
 y_train = train.fare_amount
 y_test = test.fare_amount
 
-mlflow.lightgbm.autolog()
+mlflow.lightgbm.autolog(log_models=False)
 train_lgb_dataset = lgb.Dataset(X_train, label=y_train.values)
 test_lgb_dataset = lgb.Dataset(X_test, label=y_test.values)
 
+# mlflow.log_input(train, context="training")
+# mlflow.test_lgb_dataset(test, context="testing")
+
 param = {"num_leaves": 32, "objective": "regression", "metric": "rmse"}
 num_rounds = 100
+mlflow.log_params(param)
+mlflow.log_param("num_rounds", num_rounds)
 
 # Train a lightGBM model
 model = lgb.train(param, train_lgb_dataset, num_rounds)
@@ -139,7 +144,7 @@ model = lgb.train(param, train_lgb_dataset, num_rounds)
 # Take the first row of the training dataset as the model input example.
 input_example = X_train.iloc[[0]]
 
-# Log the trained model with MLflow
+# # Log the trained model with MLflow
 mlflow.lightgbm.log_model(
     model, 
     artifact_path="lgb_model", 
@@ -148,10 +153,20 @@ mlflow.lightgbm.log_model(
     registered_model_name=model_name
 )
 
+# Log metric
+from sklearn.metrics import root_mean_squared_error, max_error
+y_pred = model.predict(X_test)
+rmse = root_mean_squared_error(list(y_test), list(y_pred))
+max_error = max_error(y_test, y_pred)
+mlflow.log_metric("rmse", rmse)
+mlflow.log_metric("max_error", max_error)
+
 # The returned model URI is needed by the model deployment notebook.
 model_version = get_latest_model_version(model_name)
 model_uri = f"models:/{model_name}/{model_version}"
 dbutils.jobs.taskValues.set("model_uri", model_uri)
 dbutils.jobs.taskValues.set("model_name", model_name)
 dbutils.jobs.taskValues.set("model_version", model_version)
+
+mlflow.end_run()
 dbutils.notebook.exit(model_uri)
