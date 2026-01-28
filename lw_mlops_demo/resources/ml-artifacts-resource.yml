@@ -9,7 +9,7 @@ grants: &grants
   grants:
     - privileges:
         - EXECUTE
-      principal: users
+      principal: 96f4af96-ba4d-4ec2-8052-1ecb026cc2e6
 
 # Defines model and experiments
 resources:
