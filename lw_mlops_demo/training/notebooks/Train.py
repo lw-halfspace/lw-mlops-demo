@@ -53,12 +53,12 @@ dbutils.widgets.text(
 # MLflow experiment name.
 dbutils.widgets.text(
     "experiment_name",
-    f"/dev-lw-mlops-demo-experiment",
+    f"/Users/lw@halfspace.onmicrosoft.com/dev-lw-mlops-demo-experiment",
     label="MLflow experiment name",
 )
 # Unity Catalog registered model name to use for the trained model.
 dbutils.widgets.text(
-    "model_name", "dev.model_registry.lw-mlops-demo-model", label="Full (Three-Level) Model Name"
+    "model_name", "lw_mlops_demo_dev.model_registry.lw-mlops-demo-model", label="Full (Three-Level) Model Name"
 )
 
 # COMMAND ----------
