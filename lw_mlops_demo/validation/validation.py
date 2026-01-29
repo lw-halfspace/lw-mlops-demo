@@ -33,9 +33,9 @@ def validation_thresholds():
         # ),
         "root_mean_squared_error": MetricThreshold(
             threshold=10,  # mean_squared_error should be <= 500
-            # min_absolute_change=0.01,  # mean_squared_error should be at least 0.01 greater than baseline model accuracy
-            min_relative_change=0.01,  # mean_squared_error should be at least 1 percent greater than baseline model accuracy
-            greater_is_better=True,
+            min_absolute_change=0.1,  # mean_squared_error should be at least 0.01 greater than baseline model accuracy
+            # min_relative_change=0.01,  # mean_squared_error should be at least 1 percent greater than baseline model accuracy
+            greater_is_better=False,
         ),
     }
 
