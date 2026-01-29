@@ -62,11 +62,11 @@ notebook_path =  '/Workspace/' + os.path.dirname(dbutils.notebook.entry_point.ge
 
 dbutils.widgets.text(
     "experiment_name",
-    "/dev-lw-mlops-demo-experiment",
+    "/Users/lw@halfspace.onmicrosoft.com/dev-lw-mlops-demo-experiment",
     "Experiment Name",
 )
-dbutils.widgets.dropdown("run_mode", "disabled", ["disabled", "dry_run", "enabled"], "Run Mode")
-dbutils.widgets.dropdown("enable_baseline_comparison", "false", ["true", "false"], "Enable Baseline Comparison")
+dbutils.widgets.dropdown("run_mode", "enabled", ["disabled", "dry_run", "enabled"], "Run Mode")
+dbutils.widgets.dropdown("enable_baseline_comparison", "true", ["true", "false"], "Enable Baseline Comparison")
 dbutils.widgets.text("validation_input", "SELECT * FROM delta.`dbfs:/databricks-datasets/nyctaxi-with-zipcodes/subsampled`", "Validation Input")
 
 dbutils.widgets.text("model_type", "regressor", "Model Type")
@@ -74,10 +74,11 @@ dbutils.widgets.text("targets", "fare_amount", "Targets")
 dbutils.widgets.text("custom_metrics_loader_function", "custom_metrics", "Custom Metrics Loader Function")
 dbutils.widgets.text("validation_thresholds_loader_function", "validation_thresholds", "Validation Thresholds Loader Function")
 dbutils.widgets.text("evaluator_config_loader_function", "evaluator_config", "Evaluator Config Loader Function")
-dbutils.widgets.text("model_name", "dev.model_registry.lw-mlops-demo-model", "Full (Three-Level) Model Name")
+dbutils.widgets.text("model_name", "lw_mlops_demo_dev.model_registry.lw-mlops-demo-model", "Full (Three-Level) Model Name")
 dbutils.widgets.text("model_version", "", "Candidate Model Version")
 
 # COMMAND ----------
+
 run_mode = dbutils.widgets.get("run_mode").lower()
 assert run_mode == "disabled" or run_mode == "dry_run" or run_mode == "enabled"
 
@@ -288,3 +289,7 @@ with mlflow.start_run(
             print(
                 "Model validation failed in DRY_RUN. It will not block model deployment."
             )
+
+# COMMAND ----------
+
+

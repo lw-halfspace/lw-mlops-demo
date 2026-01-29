@@ -53,12 +53,12 @@ dbutils.widgets.text(
 # MLflow experiment name.
 dbutils.widgets.text(
     "experiment_name",
-    f"/dev-lw-mlops-demo-experiment",
+    f"/Users/lw@halfspace.onmicrosoft.com/dev-lw-mlops-demo-experiment",
     label="MLflow experiment name",
 )
 # Unity Catalog registered model name to use for the trained model.
 dbutils.widgets.text(
-    "model_name", "dev.model_registry.lw-mlops-demo-model", label="Full (Three-Level) Model Name"
+    "model_name", "lw_mlops_demo_dev.model_registry.lw-mlops-demo-model", label="Full (Three-Level) Model Name"
 )
 
 # COMMAND ----------
@@ -131,7 +131,7 @@ test_lgb_dataset = lgb.Dataset(X_test, label=y_test.values)
 # mlflow.test_lgb_dataset(test, context="testing")
 
 param = {"num_leaves": 32, "objective": "regression", "metric": "rmse"}
-num_rounds = 100
+num_rounds = 60
 mlflow.log_params(param)
 mlflow.log_param("num_rounds", num_rounds)
 
