@@ -49,6 +49,6 @@ targets:
 
   test:
     variables:
-      catalog_name: lw_mlops_demo_tst
+      catalog_name: lw_mlops_demo_stg
     workspace:
       host: https://adb-1932855278966667.7.azuredatabricks.net
