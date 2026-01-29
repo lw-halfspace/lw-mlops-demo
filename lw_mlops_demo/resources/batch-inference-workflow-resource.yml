@@ -15,7 +15,7 @@ common_permissions: &permissions
 resources:
   jobs:
     batch_inference_job:
-      name: lw-mlops-demo-batch-inference-job
+      name: ${bundle.target}-lw-mlops-demo-batch-inference-job
       tasks:
         - task_key: batch_inference_job
           <<: *new_cluster
