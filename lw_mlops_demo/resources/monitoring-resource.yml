@@ -19,7 +19,7 @@ common_permissions: &permissions
 resources:
   quality_monitors:
     lw-mlops-demo_quality_monitor:
-      table_name: ${var.catalog_name}.model_registry.pred
+      table_name: ${var.catalog_name}.model_registry.predictions
       # TODO: Update the output schema name as per your requirements
       output_schema_name: ${var.catalog_name}.model_registry
       # TODO: Update the below parameters as per your requirements
