@@ -131,7 +131,7 @@ test_lgb_dataset = lgb.Dataset(X_test, label=y_test.values)
 # mlflow.test_lgb_dataset(test, context="testing")
 
 param = {"num_leaves": 32, "objective": "regression", "metric": "rmse"}
-num_rounds = 60
+num_rounds = 55
 mlflow.log_params(param)
 mlflow.log_param("num_rounds", num_rounds)
 
