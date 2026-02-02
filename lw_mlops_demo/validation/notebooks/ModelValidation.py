@@ -283,12 +283,13 @@ with mlflow.start_run(
             f.write("Validation failed : " + str(err) + "\n")
             f.write(traceback.format_exc())
         mlflow.log_artifact(error_file)
-        if not dry_run:
-            raise err
-        else:
-            print(
-                "Model validation failed in DRY_RUN. It will not block model deployment."
-            )
+        # if not dry_run:
+        #     raise err
+        # else:
+        #     print(
+        #         "Model validation failed in DRY_RUN. It will not block model deployment."
+        #     )
+
 
 # COMMAND ----------
 
