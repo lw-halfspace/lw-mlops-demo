@@ -131,7 +131,7 @@ test_lgb_dataset = lgb.Dataset(X_test, label=y_test.values)
 # mlflow.test_lgb_dataset(test, context="testing")
 
 param = {"num_leaves": 32, "objective": "regression", "metric": "rmse"}
-num_rounds = 55
+num_rounds =60
 mlflow.log_params(param)
 mlflow.log_param("num_rounds", num_rounds)
 
@@ -168,5 +168,15 @@ dbutils.jobs.taskValues.set("model_uri", model_uri)
 dbutils.jobs.taskValues.set("model_name", model_name)
 dbutils.jobs.taskValues.set("model_version", model_version)
 
+# Set model as champion if it's the first ever traine
+if model_version == 1:
+    client = MlflowClient(registry_uri="databricks-uc")
+    client.set_registered_model_alias(
+        name=model_name,
+        alias="champion", 
+        version=1
+    )
+
+# Cleanup
 mlflow.end_run()
 dbutils.notebook.exit(model_uri)
