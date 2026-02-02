@@ -15,7 +15,7 @@ common_permissions: &permissions
 resources:
   jobs:
     batch_inference_job:
-      name: lw-mlops-demo-batch-inference-job
+      name: ${bundle.target}-lw-mlops-demo-batch-inference-job
       tasks:
         - task_key: batch_inference_job
           <<: *new_cluster
@@ -23,7 +23,7 @@ resources:
             notebook_path: ../deployment/batch_inference/notebooks/BatchInference.py
             base_parameters:
               env: ${bundle.target}
-              input_table_name: taxi_scoring_sample  # TODO: create input table for inference
+              input_table_name: ${var.catalog_name}.model_registry.inference_input  # TODO: create input table for inference
               output_table_name: ${var.catalog_name}.model_registry.predictions
               model_name: ${var.catalog_name}.model_registry.${var.model_name}
               # git source information of current ML resource deployment. It will be persisted as part of the workflow run
