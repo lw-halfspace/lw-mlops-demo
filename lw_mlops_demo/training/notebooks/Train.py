@@ -40,7 +40,7 @@ dbutils.library.restartPython()
 # Provide them via DB widgets or notebook arguments.
 
 # Notebook Environment
-dbutils.widgets.dropdown("env", "staging", ["staging", "prod"], "Environment Name")
+dbutils.widgets.dropdown("env", "staging", ["staging", "prod", "dev"], "Environment Name")
 env = dbutils.widgets.get("env")
 
 # Path to the Hive-registered Delta table containing the training data.
@@ -130,8 +130,8 @@ test_lgb_dataset = lgb.Dataset(X_test, label=y_test.values)
 # mlflow.log_input(train, context="training")
 # mlflow.test_lgb_dataset(test, context="testing")
 
-param = {"num_leaves": 32, "objective": "regression", "metric": "rmse"}
-num_rounds =60
+param = {"num_leaves": 12, "objective": "regression", "metric": "rmse"}
+num_rounds = 100
 mlflow.log_params(param)
 mlflow.log_param("num_rounds", num_rounds)
 
@@ -149,7 +149,7 @@ mlflow.lightgbm.log_model(
     model, 
     artifact_path="lgb_model", 
     # The signature is automatically inferred from the input example and its predicted output.
-    input_example=input_example,    
+    input_example=input_example,
     registered_model_name=model_name
 )
 
